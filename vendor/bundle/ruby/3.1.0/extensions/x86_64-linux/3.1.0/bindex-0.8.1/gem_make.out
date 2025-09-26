@@ -1,0 +1,15 @@
+current directory: /home/elena_liga/Documents/study/thinknetica_rails/vendor/bundle/ruby/3.1.0/gems/bindex-0.8.1/ext/skiptrace
+/home/elena_liga/.rvm/rubies/ruby-3.1.2/bin/ruby -I /home/elena_liga/.rvm/rubies/ruby-3.1.2/lib/ruby/3.1.0 -r ./siteconf20250926-214541-7u2x92.rb extconf.rb
+creating Makefile
+
+current directory: /home/elena_liga/Documents/study/thinknetica_rails/vendor/bundle/ruby/3.1.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= clean
+
+current directory: /home/elena_liga/Documents/study/thinknetica_rails/vendor/bundle/ruby/3.1.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\=
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.so
+
+current directory: /home/elena_liga/Documents/study/thinknetica_rails/vendor/bundle/ruby/3.1.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= install
+/usr/bin/install -c -m 0755 cruby.so ./.gem.20250926-214541-urfg1y/skiptrace/internal

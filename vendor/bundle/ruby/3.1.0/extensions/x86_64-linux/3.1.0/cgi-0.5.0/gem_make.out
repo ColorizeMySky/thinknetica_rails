@@ -1,0 +1,15 @@
+current directory: /home/elena_liga/Documents/study/thinknetica_rails/vendor/bundle/ruby/3.1.0/gems/cgi-0.5.0/ext/cgi/escape
+/home/elena_liga/.rvm/rubies/ruby-3.1.2/bin/ruby -I /home/elena_liga/.rvm/rubies/ruby-3.1.2/lib/ruby/3.1.0 -r ./siteconf20250926-214541-q36l7v.rb extconf.rb
+creating Makefile
+
+current directory: /home/elena_liga/Documents/study/thinknetica_rails/vendor/bundle/ruby/3.1.0/gems/cgi-0.5.0/ext/cgi/escape
+make DESTDIR\= clean
+
+current directory: /home/elena_liga/Documents/study/thinknetica_rails/vendor/bundle/ruby/3.1.0/gems/cgi-0.5.0/ext/cgi/escape
+make DESTDIR\=
+compiling escape.c
+linking shared-object cgi/escape.so
+
+current directory: /home/elena_liga/Documents/study/thinknetica_rails/vendor/bundle/ruby/3.1.0/gems/cgi-0.5.0/ext/cgi/escape
+make DESTDIR\= install
+/usr/bin/install -c -m 0755 escape.so ./.gem.20250926-214541-76lqe9/cgi
