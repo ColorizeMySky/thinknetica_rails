@@ -1,0 +1,26 @@
+require 'rails_helper'
+
+feature 'Пользователь отвечает на вопрос' do
+  given(:user) { create(:user) }
+  given(:question) { create(:question) }
+
+  scenario 'Аутентифицированный пользователь отвечает на вопрос' do
+    sign_in(user)
+    visit question_path(question)
+    fill_in 'answer_body', with: 'Тестовый текст ответа'
+    click_on 'Post Answer'
+    expect(page).to have_content 'Тестовый текст ответа'
+  end
+
+  scenario 'Неаутентифицированный пользователь не может ответить на вопрос' do
+    visit question_path(question)
+    expect(page).to_not have_button 'Post Answer'
+  end
+
+  scenario 'Пользователь пытается создать ответ с пустым телом' do
+    sign_in(user)
+    visit question_path(question)
+    click_on 'Post Answer'
+    expect(page).to have_content "Body can't be blank"
+  end
+end

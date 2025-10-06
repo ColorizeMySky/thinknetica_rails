@@ -1,3 +1,23 @@
 h1 Question
 p = @question.title
 p = @question.body
+
+- if user_signed_in? && current_user == @question.user
+  = link_to 'Delete Question', question_path(@question), method: :delete, data: { confirm: 'Are you sure?' }
+
+h2 Answers
+- @question.answers.each do |answer|
+  - if answer.persisted?
+    p = answer.body
+    - if user_signed_in? && current_user == answer.user
+      = link_to 'Delete Answer', question_answer_path(@question, answer), method: :delete, data: { confirm: 'Are you sure?' }
+
+- if user_signed_in?
+  - if @answer&.errors&.any?
+    ul
+      - @answer.errors.full_messages.each do |message|
+        li = message
+
+  = form_with model: [@question, @question.answers.build], local: true do |f|
+    = f.text_area :body
+    = f.submit 'Post Answer'
