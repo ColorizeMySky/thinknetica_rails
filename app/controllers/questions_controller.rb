@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :destroy]
+  before_action :authenticate_user!, only: [ :new, :create, :destroy ]
 
   def index
     @questions = Question.all
@@ -26,7 +26,7 @@ class QuestionsController < ApplicationController
   def destroy
     @question = current_user.questions.find(params[:id])
     @question.destroy
-    redirect_to questions_path, notice: 'Question was successfully deleted'
+    redirect_to questions_path, notice: "Question was successfully deleted"
   end
 
   private

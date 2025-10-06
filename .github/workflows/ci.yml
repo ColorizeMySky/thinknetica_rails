@@ -19,6 +19,9 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: false
 
+      - name: Install Bundler
+        run: gem install bundler
+
       - name: Install dependencies
         run: bundle install
 
