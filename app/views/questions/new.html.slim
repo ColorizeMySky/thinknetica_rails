@@ -1,5 +1,10 @@
 h1 New Question
-= form_with model: @question do |f|
+= form_with model: @question, local: true do |f|
+  - if @question.errors.any?
+    ul
+      - @question.errors.full_messages.each do |message|
+        li = message
+
   = f.text_field :title
   = f.text_area :body
   = f.submit
