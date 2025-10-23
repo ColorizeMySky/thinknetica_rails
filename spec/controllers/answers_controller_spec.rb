@@ -10,19 +10,24 @@ RSpec.describe AnswersController, type: :controller do
 
       it 'создает новый ответ с валидными атрибутами' do
         expect {
-          post :create, params: { question_id: question, answer: attributes_for(:answer) }
+          post :create, params: { question_id: question, answer: attributes_for(:answer) }, format: :js
         }.to change(question.answers, :count).by(1)
       end
 
       it 'присваивает ответ правильному вопросу' do
-        post :create, params: { question_id: question, answer: attributes_for(:answer) }
+        post :create, params: { question_id: question, answer: attributes_for(:answer) }, format: :js
         expect(assigns(:answer).question).to eq question
       end
 
       it 'не создает ответ с невалидными атрибутами' do
         expect {
-          post :create, params: { question_id: question, answer: attributes_for(:answer, :invalid) }
+          post :create, params: { question_id: question, answer: attributes_for(:answer, :invalid) }, format: :js
         }.not_to change(question.answers, :count)
+      end
+
+      it 'рендерит шаблон create' do
+        post :create, params: { question_id: question, answer: attributes_for(:answer) }, format: :js
+        expect(response).to render_template :create
       end
     end
 

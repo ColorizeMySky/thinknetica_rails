@@ -42,6 +42,9 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include AuthenticationHelpers, type: :feature
 
+  Capybara.javascript_driver = :selenium_chrome_headless
+  Capybara.default_max_wait_time = 20
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "questions#index"
 
-  resources :questions, except: [ :edit, :update ] do
+  resources :questions do
     resources :answers, except: [ :edit, :update ]
   end
 end
