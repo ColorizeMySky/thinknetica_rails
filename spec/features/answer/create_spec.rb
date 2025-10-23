@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Пользователь отвечает на вопрос' do
   given(:user) { create(:user) }
-  given(:question) { create(:question) }
+  given(:question) { create(:question, user: user) }
 
   scenario 'Аутентифицированный пользователь отвечает на вопрос', js: true do
     sign_in(user)
@@ -10,7 +10,7 @@ feature 'Пользователь отвечает на вопрос' do
     fill_in 'answer_body', with: 'Тестовый текст ответа'
     click_on 'Post Answer'
 
-    save_and_open_page
+    expect(page).to have_css('.answers')
     within '.answers' do
       expect(page).to have_content 'Тестовый текст ответа'
     end
@@ -28,8 +28,6 @@ feature 'Пользователь отвечает на вопрос' do
 
     click_on 'Post Answer'
 
-    save_and_open_page
     expect(page).to have_content "Body can't be blank"
-    # expect(page).to have_css('.answer-errors', text: "Body can't be blank")
   end
 end

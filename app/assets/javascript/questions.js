@@ -14,6 +14,6 @@ function handleEditLinkClick(e) {
 
   if (editForm) {
     e.target.style.display = 'none'
-    editForm.classList.remove('hidden')
+    editForm.classList.remove('d-none')
   }
 }

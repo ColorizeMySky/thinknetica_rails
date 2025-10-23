@@ -43,6 +43,7 @@ RSpec.configure do |config|
   config.include AuthenticationHelpers, type: :feature
 
   Capybara.javascript_driver = :selenium_chrome_headless
+  Capybara.server = :puma, { Silent: true }
   Capybara.default_max_wait_time = 20
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
@@ -53,7 +54,7 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
@@ -70,7 +71,7 @@ RSpec.configure do |config|
   #     end
   #
   # The different available types are documented in the features, such as in
-  # https://rspec.info/features/6-0/rspec-rails
+  # https://rspec.info/features/6-0/rspec-rails  
   config.infer_spec_type_from_file_location!
 
   # Filter lines from Rails gems in backtraces.

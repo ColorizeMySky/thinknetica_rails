@@ -1,5 +1,8 @@
 <% if @answer.persisted? %>
-  document.querySelector('.answers').insertAdjacentHTML('beforeend', '<%= j render @answer %>')
+  const answersContainer = document.querySelector('.answers')
+  if (answersContainer) {
+    answersContainer.insertAdjacentHTML('beforeend', '<%= j render @answer %>')
+  }
   document.querySelector('#answer_body').value = ''
   document.querySelector('.answer-errors').innerHTML = ''
 <% else %>

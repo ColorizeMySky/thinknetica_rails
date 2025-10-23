@@ -72,4 +72,5 @@ group :test do
   gem "selenium-webdriver"
   gem "rails-controller-testing"
   gem "launchy"
+  gem "database_cleaner-active_record"
 end

@@ -8,7 +8,7 @@ feature 'Редактирование вопроса' do
     sign_in(user)
     visit question_path(question)
 
-    click_on 'Edit'
+    click_link 'Edit'
 
     fill_in 'question_title', with: 'Отредактированный заголовок'
     fill_in 'question_body', with: 'Отредактированное тело'
