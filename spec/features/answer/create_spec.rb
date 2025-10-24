@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 feature 'Пользователь отвечает на вопрос' do
-  given(:user) { create(:user) }
-  given(:question) { create(:question, user: user) }
+  given!(:user) { create(:user) }
+  given!(:question) { create(:question, user: user) }
 
   scenario 'Аутентифицированный пользователь отвечает на вопрос', js: true do
     sign_in(user)
     visit question_path(question)
+
     fill_in 'answer_body', with: 'Тестовый текст ответа'
     click_on 'Post Answer'
 
