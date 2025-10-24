@@ -43,6 +43,7 @@ RSpec.configure do |config|
   config.include AuthenticationHelpers, type: :feature
 
   Capybara.javascript_driver = :selenium_chrome_headless
+  # Capybara.javascript_driver = :selenium_chrome
   Capybara.server = :puma, { Silent: true }
   Capybara.default_max_wait_time = 20
 
@@ -71,7 +72,7 @@ RSpec.configure do |config|
   #     end
   #
   # The different available types are documented in the features, such as in
-  # https://rspec.info/features/6-0/rspec-rails  
+  # https://rspec.info/features/6-0/rspec-rails
   config.infer_spec_type_from_file_location!
 
   # Filter lines from Rails gems in backtraces.
