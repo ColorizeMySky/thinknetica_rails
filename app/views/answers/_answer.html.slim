@@ -1,7 +1,16 @@
-.answer
+.answer id="answer_#{answer.id}"
   p = answer.body
   - if user_signed_in? && current_user == answer.user
+    = link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
     = link_to 'Delete Answer',
-              question_answer_path(answer.question, answer),
+              question_answer_path(answer.question, answer, format: :js),
               method: :delete,
-              data: { confirm: 'Are you sure?' }
+              data: { confirm: 'Are you sure?', remote: true }
+
+  .answer-edit-form
+    = form_with model: [answer.question, answer],
+                local: false,
+                html: { style: 'display: none' },
+                class: 'edit-answer' do |f|
+      = f.text_area :body
+      = f.submit 'Save'

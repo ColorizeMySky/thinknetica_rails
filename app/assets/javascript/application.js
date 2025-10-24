@@ -1,3 +1,3 @@
-//= require_tree .
 //= require rails-ujs
-
+//= require turbo
+//= require_tree .

@@ -6,10 +6,14 @@ feature 'Пользователь удаляет ответ' do
   given(:question) { create(:question) }
   given!(:answer) { create(:answer, question: question, user: user) }
 
-  scenario 'Автор удаляет свой ответ' do
+  scenario 'Автор удаляет свой ответ', js: true do
     sign_in(user)
     visit question_path(question)
-    click_on 'Delete Answer'
+
+    accept_confirm do
+      click_on 'Delete Answer'
+    end
+
     expect(page).to have_content 'Answer was successfully deleted'
     expect(page).to_not have_content answer.body
   end

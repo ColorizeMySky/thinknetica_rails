@@ -11,6 +11,8 @@ feature 'Пользователь отвечает на вопрос' do
     fill_in 'answer_body', with: 'Тестовый текст ответа'
     click_on 'Post Answer'
 
+    sleep 2
+
     expect(page).to have_css('.answers')
     within '.answers' do
       expect(page).to have_content 'Тестовый текст ответа'

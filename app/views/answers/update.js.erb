@@ -1,0 +1,8 @@
+<% if @answer.errors.any? %>
+  document.querySelector('.answer-errors').innerHTML = '<%= j render "shared/errors", resource: @answer %>'
+<% else %>
+  const answerElement_<%= @answer.id %> = document.querySelector('#answer_<%= @answer.id %>')
+  if (answerElement_<%= @answer.id %>) {
+    answerElement_<%= @answer.id %>.outerHTML = '<%= j render @answer %>'
+  }
+<% end %>

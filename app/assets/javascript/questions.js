@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('turbo:load', () => {
   const editLink = document.querySelector('.edit-question-link')
 
   if (editLink) {
