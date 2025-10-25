@@ -27,6 +27,18 @@ class AnswersController < ApplicationController
     respond_to :js
   end
 
+  def mark_as_best
+    @answer = Answer.find(params[:id])
+
+    if current_user == @answer.question.user
+      @answer.mark_as_best
+      flash[:notice] = "Best answer selected"
+      respond_to :js
+    else
+      head :forbidden
+    end
+  end
+
   private
 
   def answer_params

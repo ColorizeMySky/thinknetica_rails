@@ -1,0 +1,8 @@
+<% if flash[:notice] %>
+  document.querySelector('p.notice').innerHTML = '<%= j flash[:notice] %>'
+<% end %>
+
+const answersContainer = document.querySelector('.answers')
+if (answersContainer) {
+  answersContainer.innerHTML = '<%= j render @answer.question.answers.sort_by_best %>'
+}

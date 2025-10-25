@@ -15,6 +15,10 @@ Rails.application.routes.draw do
   root "questions#index"
 
   resources :questions do
-    resources :answers
+    resources :answers do
+      member do
+        patch :mark_as_best
+      end
+    end
   end
 end
