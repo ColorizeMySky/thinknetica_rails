@@ -1,0 +1,15 @@
+  <% if @answer.persisted? %>
+  (function() {
+    let answersContainer = document.querySelector('.answers')
+    if (answersContainer && <%= @answer.persisted? %>) {
+      answersContainer.insertAdjacentHTML('beforeend', '<%= j render @answer %>')
+    }
+
+    const answerForm = document.querySelector('form[action$="/answers"]')
+    if (answerForm) answerForm.querySelector('textarea').value = ''
+
+    document.querySelector('.answer-errors').innerHTML = ''
+  })()
+<% else %>
+  document.querySelector('.answer-errors').innerHTML = '<%= j render "shared/errors", resource: @answer %>'
+<% end %>

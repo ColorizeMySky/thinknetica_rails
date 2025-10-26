@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, only: [ :new, :create, :destroy ]
+  before_action :authenticate_user!, only: [ :new, :create, :edit, :update, :destroy ]
 
   def index
     @questions = Question.all
@@ -7,6 +7,7 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
+    @answers = @question.answers.sort_by_best
   end
 
   def new
@@ -20,6 +21,20 @@ class QuestionsController < ApplicationController
       redirect_to @question
     else
       render :new
+    end
+  end
+
+  def edit
+    @question = current_user.questions.find(params[:id])
+  end
+
+  def update
+    @question = current_user.questions.find(params[:id])
+
+    if @question.update(question_params)
+      redirect_to @question
+    else
+      render :edit
     end
   end
 

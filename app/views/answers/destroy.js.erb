@@ -1,0 +1,16 @@
+console.log('Destroy JS ERB executed')
+document.querySelector('#answer_<%= @answer.id %>').remove()
+console.log('Answer element removed')
+
+const notification = document.createElement('div')
+notification.style.cssText = 'position: fixed; top: 20px; right: 20px; background: green; color: white; padding: 10px; z-index: 1000;'
+notification.innerHTML = 'Answer was successfully deleted'
+
+console.log('Notification created')
+
+const body = document.querySelector('body')
+body.insertBefore(notification, body.firstChild)
+
+setTimeout(() => {
+  notification.remove()
+}, 3000)

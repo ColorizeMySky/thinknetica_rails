@@ -41,6 +41,12 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include AuthenticationHelpers, type: :feature
+  config.include Warden::Test::Helpers
+
+  Capybara.javascript_driver = :selenium_chrome_headless
+  # Capybara.javascript_driver = :selenium_chrome
+  Capybara.server = :puma, { Silent: true }
+  # Capybara.default_max_wait_time = 20
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
