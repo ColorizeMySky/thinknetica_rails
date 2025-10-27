@@ -5,8 +5,10 @@
 
   - if answer.files.attached?
     - answer.files.each do |file|
-      p= link_to file.filename.to_s, url_for(file)
-
+      p
+        = link_to file.filename.to_s, url_for(file)
+        - if user_signed_in? && current_user == answer.user
+          = link_to 'Delete file', purge_attachment_question_answer_path(answer.question, answer, attachment_id: file.id), method: :delete, data: { confirm: 'Are you sure?' }
   - if user_signed_in? && current_user == answer.user
     = link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
 

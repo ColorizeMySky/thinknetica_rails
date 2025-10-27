@@ -15,8 +15,13 @@ Rails.application.routes.draw do
   root "questions#index"
 
   resources :questions do
+    member do
+      delete :purge_attachment
+    end
+
     resources :answers do
       member do
+        delete :purge_attachment
         patch :mark_as_best
       end
     end

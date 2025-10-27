@@ -39,6 +39,12 @@ class AnswersController < ApplicationController
     end
   end
 
+  def purge_attachment
+    @answer = current_user.answers.find(params[:id])
+    @answer.files.find(params[:attachment_id]).purge
+    redirect_to @answer.question
+  end
+
   private
 
   def answer_params
