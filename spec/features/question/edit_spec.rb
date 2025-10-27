@@ -20,6 +20,21 @@ feature 'Редактирование вопроса' do
     expect(page).not_to have_selector 'input#question_title'
   end
 
+  scenario 'Автор добавляет файлы при редактировании вопроса', js: true do
+    sign_in(user)
+    visit question_path(question)
+
+    click_link 'Edit'
+
+    within '.edit-question-form' do
+      attach_file 'Files', ["#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb"]
+      click_on 'Update Question'
+    end
+
+    expect(page).to have_link 'rails_helper.rb'
+    expect(page).to have_link 'spec_helper.rb'
+  end
+
   scenario 'Не автор не может редактировать вопрос' do
     sign_in(other_user)
     visit question_path(question)
