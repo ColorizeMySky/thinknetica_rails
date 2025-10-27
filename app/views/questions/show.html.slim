@@ -1,6 +1,9 @@
 h1 Question
 p = @question.title
 p = @question.body
+- if @question.files.attached?
+  - @question.files.each do |file|
+    p= link_to file.filename, url_for(file)
 
 - if user_signed_in? && current_user == @question.user
   = link_to 'Edit', '#', class: 'edit-question-link', data: { question_id: @question.id }
@@ -17,4 +20,6 @@ h2 Answers
 
   = form_with model: [@question, @question.answers.build], local: false do |f|
     = f.text_area :body
+    = f.label :files
+    = f.file_field :files, multiple: true
     = f.submit 'Post Answer'
