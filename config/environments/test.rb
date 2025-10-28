@@ -33,6 +33,7 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system in a temporary directory.
   config.active_storage.service = :test
+  # config.active_storage.service = :cloud_ru
 
   # Disable caching for Action Mailer templates even if Action Controller
   # caching is enabled.
