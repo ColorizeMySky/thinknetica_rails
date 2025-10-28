@@ -46,7 +46,7 @@ cloud_ru:
   service: s3
   endpoint: https://s3.cloud.ru
   region: ru-central-1
-  access_key_id: <%= Rails.application.credentials.dig(:cloud_ru, :access_key_id) %>
+  access_key_id: 0aa35eb5-fd8c-4aa1-85e9-afca3a63e37a:<%= Rails.application.credentials.dig(:cloud_ru, :access_key_id) %>
   secret_access_key: <%= Rails.application.credentials.dig(:cloud_ru, :secret_access_key) %>
   bucket: <%= Rails.application.credentials.dig(:cloud_ru, :bucket) %>
   force_path_style: true
