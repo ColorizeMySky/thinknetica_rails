@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Редактирование ответа' do
   given!(:user) { create(:user) }
-  given!(:other_user) {create(:user) }
+  given!(:other_user) { create(:user) }
   given!(:question) { create(:question) }
   given!(:answer) { create(:answer, question: question, user: user) }
 
@@ -28,7 +28,7 @@ feature 'Редактирование ответа' do
     click_on 'Edit'
 
     within '.edit-answer' do
-      attach_file 'Files', ["#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb"]
+      attach_file 'Files', [ "#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb" ]
       click_on 'Save'
     end
 

@@ -51,7 +51,7 @@ feature 'Пользователь отвечает на вопрос' do
       visit question_path(question)
 
       fill_in 'answer_body', with: 'Ответ с файлами'
-      attach_file 'Files', ["#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb"]
+      attach_file 'Files', [ "#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb" ]
       click_on 'Post Answer'
 
       within '.answers' do

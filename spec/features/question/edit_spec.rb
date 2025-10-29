@@ -27,7 +27,7 @@ feature 'Редактирование вопроса' do
     click_link 'Edit'
 
     within '.edit-question-form' do
-      attach_file 'Files', ["#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb"]
+      attach_file 'Files', [ "#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb" ]
       click_on 'Update Question'
     end
 

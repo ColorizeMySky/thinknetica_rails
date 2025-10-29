@@ -30,7 +30,7 @@ feature 'Пользователь создает вопрос' do
     scenario 'Пользователь создает вопрос с несколькими прикрепленными файлами' do
       fill_in 'question_title', with: 'Вопрос с файлами'
       fill_in 'question_body', with: 'Текст вопроса с файлами'
-      attach_file 'Files', ["#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb"]
+      attach_file 'Files', [ "#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb" ]
       click_on 'Create Question'
 
       expect(page).to have_link 'rails_helper.rb'
