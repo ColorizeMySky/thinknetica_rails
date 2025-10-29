@@ -84,4 +84,9 @@ RSpec.configure do |config|
   config.after(:all) do
     FileUtils.rm_rf("#{Rails.root}/tmp/storage")
   end
+
+  config.after(:suite) do
+    FileUtils.mkdir_p("#{Rails.root}/tmp/storage")
+    FileUtils.touch("#{Rails.root}/tmp/storage/.keep")
+  end
 end
