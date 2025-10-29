@@ -7,9 +7,12 @@ div.question
       p
         = link_to file.filename, url_for(file)
         - if user_signed_in? && current_user == @question.user
-          = link_to 'Delete file', purge_attachment_question_path(@question, attachment_id: file.id), method: :delete, data: { confirm: 'Are you sure?' }
+          = link_to 'Delete file',
+                    attachment_path(file.id),
+                    method: :delete,
+                    data: { confirm: 'Вы уверены?' }
 
-  - if user_signed_in? && current_user == @question.user
+  - if current_user_owner_of?(@question)
     = link_to 'Edit', '#', class: 'edit-question-link', data: { question_id: @question.id }
     = render 'form', question: @question
     = link_to 'Delete Question', question_path(@question), method: :delete, data: { confirm: 'Вы уверены?' }

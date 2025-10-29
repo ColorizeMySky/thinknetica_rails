@@ -44,12 +44,6 @@ class QuestionsController < ApplicationController
     redirect_to questions_path, notice: "Question was successfully deleted"
   end
 
-  def purge_attachment
-    @question = current_user.questions.find(params[:id])
-    @question.files.find(params[:attachment_id]).purge
-    redirect_to @question
-  end
-
   private
 
   def question_params
