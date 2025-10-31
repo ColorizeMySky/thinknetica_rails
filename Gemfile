@@ -58,7 +58,7 @@ group :development, :test do
   gem "rspec-rails", "~> 6.1"
   gem "shoulda-matchers", "~> 5.3"
 
-  gem "dotenv-rails", "~> 2.8", require: "dotenv/rails"
+  gem "dotenv-rails", "~> 3.1", require: "dotenv/rails"
 
   gem "factory_bot_rails"
 end
