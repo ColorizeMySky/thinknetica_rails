@@ -1,6 +1,7 @@
 h1 Questions
 
-= link_to 'New Question', new_question_path
+- if user_signed_in?
+  = link_to 'New Question', new_question_path
 
 ul
   - @questions.each do |question|

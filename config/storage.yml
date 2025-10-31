@@ -32,3 +32,22 @@ local:
 #   service: Mirror
 #   primary: local
 #   mirrors: [ amazon, google, microsoft ]
+
+yandex:
+  service: S3
+  access_key_id: <%= Rails.application.credentials.dig(:yandex, :access_key_id) %>
+  secret_access_key: <%= Rails.application.credentials.dig(:yandex, :secret_access_key) %>
+  region: ru-central1
+  bucket: <%= Rails.application.credentials.dig(:yandex, :bucket) %>
+  endpoint: https://storage.yandexcloud.net
+  force_path_style: true
+
+cloud_ru:
+  service: s3
+  endpoint: https://s3.cloud.ru
+  region: ru-central-1
+  access_key_id: "0aa35eb5-fd8c-4aa1-85e9-afca3a63e37a:<%= Rails.application.credentials.dig(:cloud_ru, :access_key_id) %>"
+  secret_access_key: <%= Rails.application.credentials.dig(:cloud_ru, :secret_access_key) %>
+  bucket: <%= Rails.application.credentials.dig(:cloud_ru, :bucket) %>
+  force_path_style: true
+  ssl_verify_peer: false

@@ -80,4 +80,13 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.after(:all) do
+    FileUtils.rm_rf("#{Rails.root}/tmp/storage")
+  end
+
+  config.after(:suite) do
+    FileUtils.mkdir_p("#{Rails.root}/tmp/storage")
+    FileUtils.touch("#{Rails.root}/tmp/storage/.keep")
+  end
 end

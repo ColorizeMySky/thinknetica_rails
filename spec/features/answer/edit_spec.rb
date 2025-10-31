@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Редактирование ответа' do
   given!(:user) { create(:user) }
-  given!(:other_user) {create(:user) }
+  given!(:other_user) { create(:user) }
   given!(:question) { create(:question) }
   given!(:answer) { create(:answer, question: question, user: user) }
 
@@ -19,6 +19,21 @@ feature 'Редактирование ответа' do
 
     expect(page).to have_content 'Отредактированный ответ'
     expect(page).not_to have_selector '.edit-answer'
+  end
+
+    scenario 'Автор добавляет файлы при редактировании ответа', js: true do
+    sign_in(user)
+    visit question_path(question)
+
+    click_on 'Edit'
+
+    within '.edit-answer' do
+      attach_file 'Files', [ "#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb" ]
+      click_on 'Save'
+    end
+
+    expect(page).to have_link 'rails_helper.rb'
+    expect(page).to have_link 'spec_helper.rb'
   end
 
   scenario 'Не автор не может редактировать ответ' do

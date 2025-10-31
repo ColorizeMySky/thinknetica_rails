@@ -3,4 +3,6 @@
             data: { question_id: question.id } do |f|
   = f.text_field :title
   = f.text_area :body
+  = f.label :files
+  = f.file_field :files, multiple: true
   = f.submit

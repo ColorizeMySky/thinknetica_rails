@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "questions#index"
 
+  resources :attachments, only: :destroy
+
   resources :questions do
     resources :answers do
       member do

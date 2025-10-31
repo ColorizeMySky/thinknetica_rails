@@ -1,20 +1,32 @@
-h1 Question
-p = @question.title
-p = @question.body
+div.question
+  h1 Question
+  p = @question.title
+  p = @question.body
+  - if @question.files.attached?
+    - @question.files.each do |file|
+      p
+        = link_to file.filename, url_for(file)
+        - if user_signed_in? && current_user == @question.user
+          = link_to 'Delete file',
+                    attachment_path(file.id),
+                    method: :delete,
+                    data: { confirm: 'Вы уверены?' }
 
-- if user_signed_in? && current_user == @question.user
-  = link_to 'Edit', '#', class: 'edit-question-link', data: { question_id: @question.id }
-  = render 'form', question: @question
-  = link_to 'Delete Question', question_path(@question), method: :delete, data: { confirm: 'Вы уверены?' }
+  - if current_user_owner_of?(@question)
+    = link_to 'Edit', '#', class: 'edit-question-link', data: { question_id: @question.id }
+    = render 'form', question: @question
+    = link_to 'Delete Question', question_path(@question), method: :delete, data: { confirm: 'Вы уверены?' }
 
-h2 Answers
-.answers
-  = render @answers
+  h2 Answers
+  .answers
+    = render @answers
 
-- if user_signed_in?
-  .answer-errors
-    = render 'shared/errors', resource: @answer || Answer.new
+  - if user_signed_in?
+    .answer-errors
+      = render 'shared/errors', resource: @answer || Answer.new
 
-  = form_with model: [@question, @question.answers.build], local: false do |f|
-    = f.text_area :body
-    = f.submit 'Post Answer'
+    = form_with model: [@question, @question.answers.build], local: false do |f|
+      = f.text_area :body
+      = f.label :files
+      = f.file_field :files, multiple: true
+      = f.submit 'Post Answer'
