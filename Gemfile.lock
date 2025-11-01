@@ -115,6 +115,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    cgi (0.5.0)
     childprocess (5.1.0)
       logger (~> 1.5)
     concurrent-ruby (1.3.5)
@@ -140,20 +141,22 @@ GEM
       dotenv (= 2.8.1)
       railties (>= 3.2)
     drb (2.2.3)
-    erb (5.1.3)
+    erb (4.0.4)
+      cgi (>= 0.3.3)
     erubi (1.13.1)
     factory_bot (6.5.5)
       activesupport (>= 6.1.0)
     factory_bot_rails (6.5.1)
       factory_bot (~> 6.5)
       railties (>= 6.1.0)
-    ffi (1.17.2-aarch64-linux-gnu)
+    ffi (1.17.2)
+    ffi (1.17.2-aarch64-linux)
     ffi (1.17.2-aarch64-linux-musl)
-    ffi (1.17.2-arm-linux-gnu)
+    ffi (1.17.2-arm-linux)
     ffi (1.17.2-arm-linux-musl)
     ffi (1.17.2-arm64-darwin)
     ffi (1.17.2-x86_64-darwin)
-    ffi (1.17.2-x86_64-linux-gnu)
+    ffi (1.17.2-x86_64-linux)
     ffi (1.17.2-x86_64-linux-musl)
     globalid (1.3.0)
       activesupport (>= 6.1)
@@ -191,6 +194,7 @@ GEM
     marcel (1.1.0)
     matrix (0.4.3)
     mini_mime (1.1.5)
+    mini_portile2 (2.8.9)
     minitest (5.26.0)
     msgpack (1.8.0)
     net-imap (0.5.12)
@@ -203,11 +207,14 @@ GEM
     net-smtp (0.5.1)
       net-protocol
     nio4r (2.7.4)
-    nokogiri (1.18.10-aarch64-linux-gnu)
+    nokogiri (1.18.10)
+      mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
+    nokogiri (1.18.10-aarch64-linux)
       racc (~> 1.4)
     nokogiri (1.18.10-aarch64-linux-musl)
       racc (~> 1.4)
-    nokogiri (1.18.10-arm-linux-gnu)
+    nokogiri (1.18.10-arm-linux)
       racc (~> 1.4)
     nokogiri (1.18.10-arm-linux-musl)
       racc (~> 1.4)
@@ -215,7 +222,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.18.10-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.18.10-x86_64-linux-gnu)
+    nokogiri (1.18.10-x86_64-linux)
       racc (~> 1.4)
     nokogiri (1.18.10-x86_64-linux-musl)
       racc (~> 1.4)
@@ -345,7 +352,7 @@ GEM
       rubocop-performance (>= 1.24)
       rubocop-rails (>= 2.30)
     ruby-progressbar (1.13.0)
-    rubyzip (3.2.1)
+    rubyzip (2.4.1)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -355,11 +362,11 @@ GEM
       sprockets-rails
       tilt
     securerandom (0.4.1)
-    selenium-webdriver (4.38.0)
+    selenium-webdriver (4.32.0)
       base64 (~> 0.2)
       logger (~> 1.4)
       rexml (~> 3.2, >= 3.2.5)
-      rubyzip (>= 1.2.2, < 4.0)
+      rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
     shoulda-matchers (5.3.0)
       activesupport (>= 5.2.0)
@@ -409,18 +416,19 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.7.3)
+    zeitwerk (2.6.18)
 
 PLATFORMS
   aarch64-linux
-  aarch64-linux-gnu
+  aarch64-linux
   aarch64-linux-musl
-  arm-linux-gnu
+  arm-linux
   arm-linux-musl
   arm64-darwin
+  ruby
   x86_64-darwin
   x86_64-linux
-  x86_64-linux-gnu
+  x86_64-linux
   x86_64-linux-musl
 
 DEPENDENCIES
@@ -445,7 +453,7 @@ DEPENDENCIES
   rspec-rails (~> 6.1)
   rubocop-rails-omakase
   sassc-rails
-  selenium-webdriver
+  selenium-webdriver (~> 4.32)
   shoulda-matchers (~> 5.3)
   slim-rails
   sprockets-rails
@@ -455,4 +463,4 @@ DEPENDENCIES
   web-console
 
 BUNDLED WITH
-   2.7.2
+   2.6.7

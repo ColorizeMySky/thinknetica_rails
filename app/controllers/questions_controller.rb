@@ -12,6 +12,7 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
+    @question.links.new
   end
 
   def create
@@ -20,7 +21,7 @@ class QuestionsController < ApplicationController
     if @question.save
       redirect_to @question
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -47,6 +48,6 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:title, :body, files: [])
+    params.require(:question).permit(:title, :body, files: [], links_attributes: [ :name, :url ])
   end
 end

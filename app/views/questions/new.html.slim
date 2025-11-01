@@ -9,4 +9,16 @@ h1 New Question
   = f.text_area :body
   = f.label :files
   = f.file_field :files, multiple: true
+
+  p Links:
+  #links
+    = f.fields_for :links do |l|
+      = render "link_fields", f: l
+    .links
+      template(data-nested-rondo-template)
+        = f.fields_for :links, Link.new, child_index: "NEW_RECORD" do |l|
+          = render "link_fields", f: l
+      = link_to "Add link", "#",
+        data: { action: "click->nested-rondo#addField",
+                association: "links" }
   = f.submit
