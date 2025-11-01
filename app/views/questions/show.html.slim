@@ -12,6 +12,15 @@
                     method: :delete,
                     data: { confirm: "Вы уверены?" }
 
+  .links
+    p Links:
+    ul
+      - @question.links.each do |link|
+        - if link.url.include?("gist.github.com")
+          script(src="#{link.url}.js")
+        - else
+          li = link_to link.name, link.url
+
   - if current_user_owner_of?(@question)
     = link_to "Edit", "#", class: "edit-question-link",
                            data: { question_id: @question.id }
@@ -33,12 +42,15 @@
       = f.text_area :body
       = f.label :files
       = f.file_field :files, multiple: true
-      .links
-        p Links:
-        ul
-          - @question.links.each do |link|
-            - if link.url.include?("gist.github.com")
-              script(src="#{link.url}.js")
-            - else
-              li = link_to link.name, link.url
+      p Answer Links:
+      #answer-links
+        = f.fields_for :links, Link.new do |l|
+          = render "answers/link_fields", f: l
+        .links
+          template
+            = f.fields_for :links, Link.new, child_index: "NEW_RECORD" do |l|
+              = render "answers/link_fields", f: l
+          = link_to "Add link", "#",
+            data: { action: "click->nested-rondo#addField",
+                    association: "links" }
       = f.submit "Post Answer"

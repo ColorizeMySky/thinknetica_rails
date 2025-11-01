@@ -1,4 +1,4 @@
 //= require rails-ujs
 //= require turbo
-//= require nested_forms
+//= require links_forms
 //= require_tree .

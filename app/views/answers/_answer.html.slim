@@ -3,34 +3,47 @@
     p Best answer
   p = answer.body
 
+  .links
+    p Links:
+    ul
+      - answer.links.each do |link|
+        - if link.url.include?("gist.github.com")
+          script(src="#{link.url}.js")
+        - else
+          li = link_to link.name, link.url
+
   - if answer.files.attached?
     - answer.files.each do |file|
       p
         = link_to file.filename.to_s, url_for(file)
         - if current_user_owner_of?(answer)
-          = link_to 'Delete file',
-                    attachment_path(file.id), method: :delete, data: { confirm: 'Вы уверены?' }
+          = link_to "Delete file",
+                    attachment_path(file.id),
+                    method: :delete,
+                    data: { confirm: "Вы уверены?" }
 
   - if current_user_owner_of?(answer)
-    = link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
+    = link_to "Edit", "#",
+      class: "edit-answer-link",
+      data: { answer_id: answer.id }
 
-    = link_to 'Delete Answer',
+    = link_to "Delete Answer",
               question_answer_path(answer.question, answer, format: :js),
               method: :delete,
-              data: { confirm: 'Are you sure?', remote: true }
+              data: { confirm: "Are you sure?", remote: true }
 
   - if user_signed_in? && current_user == answer.question.user
-    = link_to 'Mark as best',
+    = link_to "Mark as best",
                 mark_as_best_question_answer_path(answer.question, answer),
                 method: :patch,
                 data: { remote: true }
 
   .answer-edit-form
-    = form_with model: [answer.question, answer],
+    = form_with model: [ answer.question, answer ],
                 local: false,
-                html: { style: 'display: none' },
-                class: 'edit-answer' do |f|
+                html: { style: "display: none" },
+                class: "edit-answer" do |f|
       = f.text_area :body
       = f.label :files
       = f.file_field :files, multiple: true
-      = f.submit 'Save'
+      = f.submit "Save"
