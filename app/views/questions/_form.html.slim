@@ -1,8 +1,19 @@
-= form_with model: question,
+= form_with model: question, local: true,
             class: "d-none edit-question-form",
             data: { question_id: question.id } do |f|
   = f.text_field :title
   = f.text_area :body
   = f.label :files
+  p Links:
+  #links
+    = f.fields_for :links do |l|
+      = render "link_fields", f: l
+    .links
+      template
+        = f.fields_for :links, Link.new, child_index: "NEW_RECORD" do |l|
+          = render "link_fields", f: l
+      = link_to "Add link", "#",
+        data: { action: "click->nested-rondo#addField",
+                association: "links" }
   = f.file_field :files, multiple: true
   = f.submit

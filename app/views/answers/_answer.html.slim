@@ -46,4 +46,15 @@
       = f.text_area :body
       = f.label :files
       = f.file_field :files, multiple: true
+      p Answer Links:
+      #answer-links
+        = f.fields_for :links do |l|
+          = render "answers/link_fields", f: l
+        .links
+          template
+            = f.fields_for :links, Link.new, child_index: "NEW_RECORD" do |l|
+              = render "answers/link_fields", f: l
+          = link_to "Add link", "#",
+            data: { action: "click->nested-rondo#addField",
+                    association: "links" }
       = f.submit "Save"

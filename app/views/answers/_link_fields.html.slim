@@ -5,6 +5,5 @@
   p
     = f.label :url
     = f.text_field :url
-  = link_to "Remove link", "#",
-            class: "dynamic",
-            data: { action: "click->nested-rondo#removeField" }
+  = link_to "Remove link", link_path(f.object),
+            method: :delete, remote: true if f.object.persisted?

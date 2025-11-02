@@ -1,5 +1,5 @@
 document.addEventListener('turbo:load', () => {
-  document.addEventListener('click', handleClick);
+  document.addEventListener('click', handleClick)
 })
 
 const handleClick = (e) => {
@@ -14,14 +14,14 @@ const handleClick = (e) => {
 }
 
 const addLinkField = (button) => {
-  const form = button.closest('form');
-  const container = form.querySelector('#answer-links') || form.querySelector('#links');
-  const linksDiv = container.querySelector('.links');
-  const template = linksDiv.querySelector('template');
-  const newId = new Date().getTime();
-  const newContent = template.innerHTML.replace(/NEW_RECORD/g, newId);
+  const form = button.closest('form')
+  const container = form.querySelector('#answer-links') || form.querySelector('#links')
+  const linksDiv = container.querySelector('.links')
+  const template = linksDiv.querySelector('template')
+  const newId = new Date().getTime()
+  const newContent = template.innerHTML.replace(/NEW_RECORD/g, newId)
 
-  container.insertAdjacentHTML('beforeend', newContent);
+  container.insertAdjacentHTML('beforeend', newContent)
 }
 
 const removeLinkField = (button) => {
