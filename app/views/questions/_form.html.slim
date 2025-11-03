@@ -2,8 +2,9 @@
             class: "d-none edit-question-form",
             data: { question_id: question.id } do |f|
   = f.text_field :title
+
   = f.text_area :body
-  = f.label :files
+
   p Links:
   #links
     = f.fields_for :links do |l|
@@ -15,5 +16,15 @@
       = link_to "Add link", "#",
         data: { action: "click->nested-rondo#addField",
                 association: "links" }
+
+  = f.label :files
   = f.file_field :files, multiple: true
+
+    p Reward:
+    = f.fields_for :reward do |r|
+      = r.label :title, "Reward title"
+      = r.text_field :title
+      = r.label :image, "Reward image"
+      = r.file_field :image
+
   = f.submit

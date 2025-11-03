@@ -1,0 +1,11 @@
+h1 My Rewards
+
+- if @rewards.any?
+  - @rewards.each do |reward|
+    .reward
+      h3 = reward.title
+      p Question: #{reward.question.title}
+      - if reward.image.attached?
+        = image_tag reward.image, alt: reward.title
+- else
+  p You have no rewards yet.

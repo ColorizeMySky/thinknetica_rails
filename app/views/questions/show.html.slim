@@ -21,6 +21,13 @@
         - else
           li = link_to link.name, link.url
 
+  - if @question.reward
+    .reward
+      h3 Reward for best answer:
+      p = @question.reward.title
+      - if @question.reward.image.attached?
+        = image_tag @question.reward.image, alt: @question.reward.title
+
   - if current_user_owner_of?(@question)
     = link_to "Edit", "#", class: "edit-question-link",
                            data: { question_id: @question.id }
@@ -42,6 +49,7 @@
       = f.text_area :body
       = f.label :files
       = f.file_field :files, multiple: true
+
       p Answer Links:
       #answer-links
         = f.fields_for :links, Link.new do |l|
