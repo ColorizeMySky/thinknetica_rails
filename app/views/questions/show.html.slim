@@ -47,7 +47,7 @@
     = form_with model: [ @question, @question.answers.build ],
                 local: false do |f|
       = f.text_area :body
-      = f.label :files
+      = f.label :files, "Files"
       = f.file_field :files, multiple: true
 
       p Answer Links:

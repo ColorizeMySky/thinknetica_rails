@@ -1,7 +1,7 @@
 class CreateRewards < ActiveRecord::Migration[7.2]
   def change
     create_table :rewards do |t|
-      t.string :title
+      t.string :title, null: false
       t.belongs_to :question, null: false, foreign_key: true
       t.belongs_to :user, null: true, foreign_key: true
 
