@@ -1,0 +1,30 @@
+- if user_signed_in?
+  .answer-errors.mb-3
+    = render "shared/errors", resource: @answer || Answer.new
+
+  = form_with model: [ @question, @question.answers.build ],
+              local: false,
+              class: "mt-4 p-3 border rounded" do |f|
+    .mb-3
+      = f.text_area :body,
+        class: "form-control",
+        rows: 4,
+        placeholder: "Your answer..."
+    .mb-3
+      = f.label :files, "Files", class: "form-label"
+      = f.file_field :files, multiple: true, class: "form-control"
+
+    .mb-3
+      p.fw-bold Answer Links:
+      #answer-links
+        = f.fields_for :links, Link.new do |l|
+          = render "answers/link_fields", f: l
+        .links
+          template
+            = f.fields_for :links, Link.new, child_index: "NEW_RECORD" do |l|
+              = render "answers/link_fields", f: l
+          = link_to "Add link", "#",
+            class: "btn btn-sm btn-outline-secondary mt-2",
+            data: { action: "click->nested-rondo#addField",
+                    association: "links" }
+    = f.submit "Post Answer", class: "btn btn-primary"

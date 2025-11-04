@@ -1,12 +1,15 @@
-.nested-fields
+.nested-fields.mb-3.p-3.border.rounded
   = f.hidden_field :id if f.object.persisted?
 
-  p
-    = f.label :name, "Link name"
-    = f.text_field :name
-  p
-    = f.label :url
-    = f.text_field :url
+  .mb-2
+    = f.label :name, "Link name", class: "form-label"
+    = f.text_field :name, class: "form-control"
+  .mb-2
+    = f.label :url, class: "form-label"
+    = f.text_field :url, class: "form-control"
 
-  = link_to "Remove link", link_path(f.object),
-            method: :delete, remote: true if f.object.persisted?
+  - if f.object.persisted?
+    = link_to "Remove link", link_path(f.object),
+              method: :delete,
+              remote: true,
+              class: "btn btn-sm btn-outline-danger"

@@ -1,60 +1,71 @@
-.answer id="answer_#{answer.id}"
-  - if answer.best
-    p Best answer
-  p = answer.body
+.answer.card.mb-3 id="answer_#{answer.id}"
+  .card-body
+    - if answer.best
+      p.badge.bg-success.mb-2 Best answer
+    p.card-text = answer.body
 
-  .links
-    p Links:
-    ul
-      - answer.links.each do |link|
-        - if link.url.include?("gist.github.com")
-          script(src="#{link.url}.js")
-        - else
-          li = link_to link.name, link.url
+    .links.mt-3
+      p.fw-bold Links:
+      ul.list-unstyled
+        - answer.links.each do |link|
+          - if link.url.include?("gist.github.com")
+            script(src="#{link.url}.js")
+          - else
+            li.mb-1 = link_to link.name, link.url, class: "text-decoration-none"
 
-  - if answer.files.attached?
-    - answer.files.each do |file|
-      p
-        = link_to file.filename.to_s, url_for(file)
-        - if current_user_owner_of?(answer)
-          = link_to "Delete file",
-                    attachment_path(file.id),
-                    method: :delete,
-                    data: { confirm: "Вы уверены?" }
+    - if answer.files.attached?
+      .mt-3
+        - answer.files.each do |file|
+          .d-flex.align-items-center.mb-1
+            = link_to file.filename.to_s, url_for(file), class: "me-2"
+            - if current_user_owner_of?(answer)
+              = link_to "Delete file",
+                        attachment_path(file.id),
+                        method: :delete,
+                        class: "btn btn-sm btn-outline-danger",
+                        data: { confirm: "Вы уверены?" }
 
-  - if current_user_owner_of?(answer)
-    = link_to "Edit", "#",
-      class: "edit-answer-link",
-      data: { answer_id: answer.id }
+    - if current_user_owner_of?(answer)
+      .mt-3
+        = link_to "Edit", "#",
+          class: "edit-answer-link btn btn-outline-primary btn-sm me-2",
+          data: { answer_id: answer.id }
+        = link_to "Delete Answer",
+                  question_answer_path(answer.question, answer, format: :js),
+                  method: :delete,
+                  class: "btn btn-outline-danger btn-sm",
+                  data: { confirm: "Are you sure?", remote: true }
 
-    = link_to "Delete Answer",
-              question_answer_path(answer.question, answer, format: :js),
-              method: :delete,
-              data: { confirm: "Are you sure?", remote: true }
+    - if user_signed_in? && current_user == answer.question.user
+      .mt-3
+        = link_to "Mark as best",
+                  mark_as_best_question_answer_path(answer.question, answer),
+                  method: :patch,
+                  class: "btn btn-outline-success btn-sm",
+                  data: { remote: true }
 
-  - if user_signed_in? && current_user == answer.question.user
-    = link_to "Mark as best",
-                mark_as_best_question_answer_path(answer.question, answer),
-                method: :patch,
-                data: { remote: true }
-
-  .answer-edit-form
-    = form_with model: [ answer.question, answer ],
-                local: false,
-                html: { style: "display: none" },
-                class: "edit-answer" do |f|
-      = f.text_area :body
-      = f.label :files
-      = f.file_field :files, multiple: true
-      p Answer Links:
-      #answer-links
-        = f.fields_for :links do |l|
-          = render "answers/link_fields", f: l
-        .links
-          template
-            = f.fields_for :links, Link.new, child_index: "NEW_RECORD" do |l|
+    .answer-edit-form.mt-3
+      = form_with model: [ answer.question, answer ],
+                  local: false,
+                  html: { style: "display: none" },
+                  class: "edit-answer p-3 border rounded bg-light" do |f|
+        .mb-3
+          = f.text_area :body, class: "form-control", rows: 4
+        .mb-3
+          = f.label :files, class: "form-label"
+          = f.file_field :files, multiple: true, class: "form-control"
+        .mb-3
+          p.fw-bold Answer Links:
+          #answer-links
+            = f.fields_for :links do |l|
               = render "answers/link_fields", f: l
-          = link_to "Add link", "#",
-            data: { action: "click->nested-rondo#addField",
-                    association: "links" }
-      = f.submit "Save"
+            .links
+              template
+                = f.fields_for :links, Link.new,
+                  child_index: "NEW_RECORD" do |l|
+                  = render "answers/link_fields", f: l
+              = link_to "Add link", "#",
+                class: "btn btn-sm btn-outline-secondary mt-2",
+                data: { action: "click->nested-rondo#addField",
+                        association: "links" }
+        = f.submit "Save", class: "btn btn-primary"
