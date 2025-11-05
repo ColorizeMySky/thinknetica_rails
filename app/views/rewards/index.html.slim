@@ -1,0 +1,17 @@
+h1.mb-4 My Rewards
+
+- if @rewards.any?
+  .row
+    - @rewards.each do |reward|
+      .col-md-6.mb-4
+        .reward.card
+          .card-body
+            h3.card-title = reward.title
+            p.card-text Question: #{reward.question.title}
+            - if reward.image.attached?
+              .mt-3
+                = image_tag reward.image, alt: reward.title,
+                  class: "img-fluid rounded"
+- else
+  .alert.alert-info
+    p.mb-0 You have no rewards yet.

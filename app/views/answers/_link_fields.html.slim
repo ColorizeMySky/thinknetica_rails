@@ -1,0 +1,12 @@
+.nested-fields.mb-3.p-3.border.rounded
+  .mb-2
+    = f.label :name, "Link name", class: "form-label"
+    = f.text_field :name, class: "form-control"
+  .mb-2
+    = f.label :url, class: "form-label"
+    = f.text_field :url, class: "form-control"
+  - if f.object.persisted?
+    = link_to "Remove link", link_path(f.object),
+              method: :delete,
+              remote: true,
+              class: "btn btn-sm btn-outline-danger"

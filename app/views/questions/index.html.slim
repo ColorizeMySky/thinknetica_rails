@@ -1,8 +1,11 @@
-h1 Questions
+h1.mb-4 Questions
 
 - if user_signed_in?
-  = link_to 'New Question', new_question_path
+  = link_to "New Question", new_question_path, class: "btn btn-primary mb-4"
 
-ul
-  - @questions.each do |question|
-    li= link_to question.title, question
+- @questions.each do |question|
+  .card.mb-3
+    .card-body
+      h5.card-title = link_to question.title, question,
+                      class: "text-decoration-none"
+      p.card-text.text-muted = truncate(question.body, length: 100)

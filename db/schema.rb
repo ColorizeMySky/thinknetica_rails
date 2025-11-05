@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_10_26_234457) do
+ActiveRecord::Schema[7.2].define(version: 2025_11_02_231850) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,6 +53,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_26_234457) do
     t.index ["user_id"], name: "index_answers_on_user_id"
   end
 
+  create_table "links", force: :cascade do |t|
+    t.string "name"
+    t.string "url"
+    t.string "linkable_type", null: false
+    t.bigint "linkable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["linkable_type", "linkable_id"], name: "index_links_on_linkable"
+  end
+
   create_table "questions", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -60,6 +70,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_26_234457) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_questions_on_user_id"
+  end
+
+  create_table "rewards", force: :cascade do |t|
+    t.string "title", null: false
+    t.bigint "question_id", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_rewards_on_question_id"
+    t.index ["user_id"], name: "index_rewards_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -79,4 +99,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_26_234457) do
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
   add_foreign_key "questions", "users"
+  add_foreign_key "rewards", "questions"
+  add_foreign_key "rewards", "users"
 end

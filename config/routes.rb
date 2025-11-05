@@ -16,6 +16,10 @@ Rails.application.routes.draw do
 
   resources :attachments, only: :destroy
 
+  resources :links, only: :destroy
+
+  resources :rewards, only: :index
+
   resources :questions do
     resources :answers do
       member do

@@ -1,32 +1,51 @@
-div.question
-  h1 Question
-  p = @question.title
-  p = @question.body
+.question.mb-4
+  h1.h2.mb-3 Question
+  p.lead = @question.title
+  p.text-muted = @question.body
+
   - if @question.files.attached?
-    - @question.files.each do |file|
-      p
-        = link_to file.filename, url_for(file)
-        - if user_signed_in? && current_user == @question.user
-          = link_to 'Delete file',
-                    attachment_path(file.id),
-                    method: :delete,
-                    data: { confirm: 'Вы уверены?' }
+    .mt-3
+      - @question.files.each do |file|
+        .d-flex.align-items-center.mb-1
+          = link_to file.filename, url_for(file), class: "me-2"
+          - if user_signed_in? && current_user == @question.user
+            = link_to "Delete file",
+                      attachment_path(file.id),
+                      method: :delete,
+                      class: "btn btn-sm btn-outline-danger",
+                      data: { confirm: "Вы уверены?" }
+
+  .links.mt-3
+    h5 Links:
+    ul.list-unstyled
+      - @question.links.each do |link|
+        - if link.url.include?("gist.github.com")
+          script(src="#{link.url}.js")
+        - else
+          li.mb-1 = link_to link.name, link.url, class: "text-decoration-none"
+
+  - if @question.reward
+    .reward.card.mt-3
+      .card-body
+        h5.card-title Reward for best answer:
+        p.card-text = @question.reward.title
+        - if @question.reward.image.attached?
+          = image_tag @question.reward.image, alt: @question.reward.title,
+            class: "img-thumbnail", style: "max-width: 200px"
 
   - if current_user_owner_of?(@question)
-    = link_to 'Edit', '#', class: 'edit-question-link', data: { question_id: @question.id }
-    = render 'form', question: @question
-    = link_to 'Delete Question', question_path(@question), method: :delete, data: { confirm: 'Вы уверены?' }
+    .mt-3
+      = link_to "Edit", "#",
+                class: "edit-question-link btn btn-outline-primary me-2",
+                data: { question_id: @question.id }
+      = link_to "Delete Question", question_path(@question),
+                method: :delete,
+                class: "btn btn-outline-danger",
+                data: { confirm: "Вы уверены?" }
+    = render "form", question: @question
 
-  h2 Answers
-  .answers
+  h2.mt-4 Answers
+  .answers.mt-3
     = render @answers
 
-  - if user_signed_in?
-    .answer-errors
-      = render 'shared/errors', resource: @answer || Answer.new
-
-    = form_with model: [@question, @question.answers.build], local: false do |f|
-      = f.text_area :body
-      = f.label :files
-      = f.file_field :files, multiple: true
-      = f.submit 'Post Answer'
+    = render "questions/answer_form", question: @question
