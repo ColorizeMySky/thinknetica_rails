@@ -76,4 +76,4 @@ group :test do
   gem "database_cleaner-active_record"
 end
 
-gem "selenium-webdriver", "~> 4.32"
+gem "selenium-webdriver", "~> 4.38"
