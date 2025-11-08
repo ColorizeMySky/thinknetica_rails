@@ -9,7 +9,7 @@ RSpec.describe Vote, type: :model do
   it { should belong_to(:votable) }
 
   it { should validate_presence_of(:value) }
-  it { should validate_inclusion_of(:value).in_array([-1, 1]) }
+  it { should validate_inclusion_of(:value).in_array([ -1, 1 ]) }
 
   describe 'проверка уникальности' do
     let!(:vote) { create(:vote, user: user, votable: question, value: 1) }

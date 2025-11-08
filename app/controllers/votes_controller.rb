@@ -6,7 +6,7 @@ class VotesController < ApplicationController
     if @votable.vote_up(current_user)
       render turbo_stream: turbo_stream.replace(
         "vote-block-#{@votable.class.name.underscore}-#{@votable.id}",
-        partial: 'shared/voting',
+        partial: "shared/voting",
         locals: { votable: @votable }
       )
     else
@@ -18,7 +18,7 @@ class VotesController < ApplicationController
     if @votable.vote_down(current_user)
       render turbo_stream: turbo_stream.replace(
         "vote-block-#{@votable.class.name.underscore}-#{@votable.id}",
-        partial: 'shared/voting',
+        partial: "shared/voting",
         locals: { votable: @votable }
       )
     else
@@ -30,7 +30,7 @@ class VotesController < ApplicationController
     @votable.cancel_vote(current_user)
     render turbo_stream: turbo_stream.replace(
       "vote-block-#{@votable.class.name.underscore}-#{@votable.id}",
-      partial: 'shared/voting',
+      partial: "shared/voting",
       locals: { votable: @votable }
     )
   end
@@ -50,6 +50,6 @@ class VotesController < ApplicationController
   end
 
   def render_json_error
-    render json: { error: 'Не удалось проголосовать' }, status: :unprocessable_entity
+    render json: { error: "Не удалось проголосовать" }, status: :unprocessable_entity
   end
 end
