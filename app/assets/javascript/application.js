@@ -1,4 +1,3 @@
-//= require rails-ujs
 //= require turbo
-//= require links_forms
+//= require rails-ujs
 //= require_tree .

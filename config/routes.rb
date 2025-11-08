@@ -27,4 +27,12 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resources :votes, only: [] do
+    collection do
+      post ':votable_type/:votable_id/vote_up', to: 'votes#vote_up', as: :vote_up
+      post ':votable_type/:votable_id/vote_down', to: 'votes#vote_down', as: :vote_down
+      delete ':votable_type/:votable_id/cancel_vote', to: 'votes#cancel_vote', as: :cancel_vote
+    end
+  end
 end
