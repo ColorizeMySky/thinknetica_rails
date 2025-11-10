@@ -1,0 +1,26 @@
+.vote-block.mt-3.mb-3 id="vote-block-#{votable.class.name.underscore}-#{votable.id}"
+  data-votable-type="#{votable.class.name.underscore}"
+  data-votable-id="#{votable.id}"
+  .rating
+    strong Рейтинг:&nbsp;
+    span.rating-value = votable.rating
+
+  - if user_signed_in? && !current_user_owner_of?(votable)
+    - if votable.voted_by?(current_user)
+      = button_to "Отменить голос",
+                  cancel_vote_votes_path(votable_type: votable.class.name.underscore, votable_id: votable.id),
+                  method: :delete,
+                  form: { data: { turbo_stream: true } },
+                  class: "btn btn-sm btn-outline-warning vote-btn"
+    - else
+      .d-flex.gap-2
+        = button_to "Голосовать за",
+                    vote_up_votes_path(votable_type: votable.class.name.underscore, votable_id: votable.id),
+                    method: :post,
+                    form: { data: { turbo_stream: true } },
+                    class: "btn btn-sm btn-outline-success vote-btn"
+        = button_to "Голосовать против",
+                    vote_down_votes_path(votable_type: votable.class.name.underscore, votable_id: votable.id),
+                    method: :post,
+                    form: { data: { turbo_stream: true } },
+                    class: "btn btn-sm btn-outline-danger vote-btn"

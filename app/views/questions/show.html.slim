@@ -3,6 +3,8 @@
   p.lead = @question.title
   p.text-muted = @question.body
 
+  = render 'shared/voting', votable: @question
+
   - if @question.files.attached?
     .mt-3
       - @question.files.each do |file|

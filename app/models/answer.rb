@@ -11,6 +11,8 @@ class Answer < ApplicationRecord
 
   scope :sort_by_best, -> { order(best: :desc) }
 
+  include Votable
+
   def mark_as_best
     transaction do
       question.answers.where(best: true).update_all(best: false)

@@ -4,6 +4,8 @@
       p.badge.bg-success.mb-2 Best answer
     p.card-text = answer.body
 
+    = render 'shared/voting', votable: answer
+
     .links.mt-3
       p.fw-bold Links:
       ul.list-unstyled

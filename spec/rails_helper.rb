@@ -6,6 +6,7 @@ require_relative '../config/environment'
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
+require 'with_model'
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
@@ -42,6 +43,8 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include AuthenticationHelpers, type: :feature
   config.include Warden::Test::Helpers
+
+  config.extend WithModel
 
   Capybara.javascript_driver = :selenium_chrome_headless
   # Capybara.javascript_driver = :selenium_chrome
