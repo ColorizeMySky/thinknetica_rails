@@ -77,4 +77,4 @@ group :test do
   gem "with_model"
 end
 
-gem "selenium-webdriver", "~> 4.38"
+gem "selenium-webdriver", "~> 4.39"

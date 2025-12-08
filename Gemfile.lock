@@ -337,7 +337,7 @@ GEM
       sprockets-rails
       tilt
     securerandom (0.4.1)
-    selenium-webdriver (4.38.0)
+    selenium-webdriver (4.39.0)
       base64 (~> 0.2)
       logger (~> 1.4)
       rexml (~> 3.2, >= 3.2.5)
@@ -420,7 +420,7 @@ DEPENDENCIES
   rspec-rails (~> 6.1)
   rubocop-rails-omakase
   sassc-rails
-  selenium-webdriver (~> 4.38)
+  selenium-webdriver (~> 4.39)
   shoulda-matchers (~> 5.3)
   slim-rails
   sprockets-rails
